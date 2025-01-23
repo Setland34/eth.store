@@ -95,3 +95,26 @@ cat ./etsthore.json
 	}
 ]
 ```
+
+## Bandit Scan GitHub Action
+
+To use the Bandit scan GitHub Action for running a security scan on your Python project, you can follow the example GitHub Actions configuration below:
+
+```yaml
+name: Bandit Scan
+
+on: [push, pull_request]
+
+jobs:
+  bandit-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bandit Scan
+        uses: shundor/python-bandit-scan@9cc5aa4a006482b8a7f91134412df6772dbda22c
+        with:
+          exit_zero: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+This configuration will run the Bandit scan on your Python project whenever there is a push or pull request. The `exit_zero: true` option ensures that the scan does not fail the workflow even if issues are found. The `GITHUB_TOKEN` is provided via `${{ secrets.GITHUB_TOKEN }}` for authentication.
