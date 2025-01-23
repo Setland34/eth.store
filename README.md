@@ -95,3 +95,24 @@ cat ./etsthore.json
 	}
 ]
 ```
+
+## Bandit Scan GitHub Action
+
+To use the Bandit scan GitHub Action for running a Bandit scan on a Python project, you can add the following configuration to your GitHub Actions workflow file:
+
+```yaml
+name: Bandit Scan
+
+on: [push, pull_request]
+
+jobs:
+  bandit-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bandit Scan
+        uses: shundor/python-bandit-scan@9cc5aa4a006482b8a7f91134412df6772dbda22c
+        with:
+          exit_zero: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
